@@ -1,0 +1,233 @@
+\documentclass[11pt,letterpaper,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\usepackage{fourier}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{hugo}
+\begin{document}
+\title{\huge{\textbf{SIMULACIÓN DE LA PROPAGACIÓN DE UN HAZ GAUSSIANO Y SUS PATRONES DE DIFRACCIÓN AL PASAR POR UNA RENDIJA.        }}}	 
+
+\author{\small \textit{{ H. Torres $^{1}$ }}
+\\
+\small \textit{ $^{1}$ Estudiante del programa de Física, Universidad del Atlántico, Barranquilla-Colombia}\\}
+\date{}
+
+\twocolumn[
+\begin{@twocolumnfalse}
+\maketitle
+\begin{center}
+{\rule[0mm]{160mm}{0.2mm}}
+\end{center}
+\begin{abstract}
+{\footnotesize \textit{Se realizo el análisis de la propagación de un haz de luz gaussiano atreves del eje z bajo las condiciones de mínimos cambios en los demás ejes, para esto se utilizo la  herramienta computacional de Matlab y los algoritmos de la transformada de Fourier, se determino el cambio en la cintura del haz y la difracción de Fresnel y Fraunhofer; obteniendo cada uno de los patrones de difracción. }}\\ 
+\\
+{\footnotesize \textbf{Palabras clave: propagación, transformada de Fourier , difracción.}}
+\begin{center}
+\textbf{Abstract} 
+\end{center}
+\par 
+{\footnotesize \textit{
+We performed the analysis of the propagation of a Gaussian light beam across the z axis under the conditions of minimum changes in the other axes, for this we used the Matlab computational tool and the Fourier transform algorithms, the change was determined at the waist of the beam and the diffraction of Fresnel and Fraunhofer; obtaining each of the diffraction patterns.}}\\
+\\
+{\footnotesize \textbf{ Keywords: propagation, Fourier transform, diffraction.}}
+\end{abstract}
+\begin{center}
+{\rule[0mm]{160mm}{0.2mm}}
+\end{center}
+\end{@twocolumnfalse}
+]
+\section{\normalsize{INTRODUCCIÓN}}
+El principio físico fundamental en el caso de un metamaterial consiste en "sustituir" átomos por microestructuras fabricadas en el laboratorio, las cuales al igual que los átomos, presenten actividad electromagnética, es decir, tienen una función dieléctrica $\varepsilon (w)$ y una magnética $\mu (w)$, permitividad eléctrica y permeabilidad  magnética; La primera nos ayuda a saber qué tanto se pueden separar las cargas eléctricas positivas de las negativas en un material, en presencia de un campo eléctrico. Cuando sucede lo anterior se dice que se polariza un material. Si sucede que las cargas se separan demasiado al grado de que las negativas queden libres, se dice que el material es un conductor, como sucede con los metales, Por otro lado, la permeabilidad magnética es una cantidad que proporciona información acerca de la respuesta de un material a un campo magnético. Si un material en su interior tiende a oponerse a la formación de campos magnéticos, se dice que es diamagnético; en cambio si dentro del material se induce un campo magnético, se dice que el material es paramagnético, en la naturaleza por lo general estas  características de la materia son siempre cantidades positivas, en el año de 1967 la propuesta de los materiales con índice de refracción negativo la hizo el físico de la ex Unión Soviética, Victor G. Veselago, quien analizó de forma hipotética el comportamiento de estos materiales, aun cuando sabía que no los podría encontrar en la naturaleza, no fue si no hasta 30 años después que se encontró la posibilidad de construir tales materiales.
+
+Un primer grupo de investigadores de la universidad de Duke, en los Estados Unidos (en 1996 y 1999 respectivamente), encontraron un modo de obtener mediante estructuras metálicas permitividades negativas, $\varepsilon<0$, y permeabilidades negativas, $\mu<0$, utilizando arreglos de alambres y anillos metálicos respectivamente. Posteriormente otro grupo de investigadores de la Universidad de California comprobó experimentalmente la existencia de la refracción negativa en 2001, a partir de un arreglo de alambres y anillos metálicos juntos $ (SRRs)$.
+ 
+\section{\normalsize{MARCO TEÓRICO.}}
+
+\subsection{ANILLOS RESONADORES}
+
+En 1999, un grupo de investigación de la universidad de Duke sugieren que ciertas configuraciones de medios conductores no magnéticos podrían tener respuesta magnética considerablemente fuerte cuando son sometidas a la presencia de un campo electromagnético. En particular, predijeron que estas configuraciones tendrían permeabilidad magnética negativa en un rango determinado y finito de frecuencias. La estructura propuesta consistía en un doble anillo con las aberturas orientadas en sentidos opuestos como se muestra en la Figura (1) La novedad de la estructura propuesta  radicaba en la disposición de las aberturas de los anillos y tiene la siguiente explicación: Cuando la OEM (onda electromagnética)  se propaga en el interior del material excita o induce una corriente eléctrica (flecha en color azul) en la misma dirección en ambos anillos (sentido horario en ambos anillos de la Figura (1). Según la cual los portadores de carga en la corriente son positivos, entonces la abertura del anillo exterior dispone la acumulación de cargas positivas en la mitad superior de este, y por defecto, de cargas negativas en la mitad inferior del anillo. En el anillo interior, la abertura dispone las cargas positivas en la parte inferior y, por defecto, las negativas en la parte superior. El resultado final, como puede notarse a simple vista, es la creación de dos condensadores conectados en serie, cada uno de ellos con una apreciable capacidad eléctrica e inductancia magnética distribuida. El número de anillos utilizados para construir la estructura solo está limitado, en principio, por la condición de homogeneidad. Una vez aceptado que un anillo con abertura equivale a un circuito LC, podemos construir estructuras con capacitancias e inductancias apreciablemente mayores, agregando anillos concéntricos. Toda la estructura sería el resultado de conectar eléctricamente los circuitos elementales equivalentes de cada resonador $(SRRs)$
+
+\subsection{DESARROLLO MATEMÁTICO.}
+La ecuación matemática de  un arreglo lineal de estos anillos resonantes para un modelo lineal esta dado por la siguiente ecuación diferencial: 
+
+\begin{equation}
+\frac { { d }^{ 2 } }{ d{ t }^{ 2 } } \left[ { q }_{ n }+\lambda \left( { q }_{ n+1 }+{ q }_{ n-1 } \right) \right]+{ w }_{ 0 }^{ 2 }{ q }_{ n } =0
+\end{equation}
+
+Se supone un tipo de solución de la siguiente manera.
+$$
+{ q }_{ n }\left( t \right) ={ Q }_{ n }exp\left( i\Omega t \right) $$
+Se remplaza la solución sugerida en la ecuación diferencial y se agrupa de la manera correta se obtendrá:
+
+\begin{equation}
+{ \Omega  }^{ 2 }\left[ { Q }_{ n }+\lambda { q }_{ n-1 }+\lambda { q }_{ n+1 } \right] ={ w }_{ 0 }^{ 2 }{ Q }_{ n }
+\end{equation}
+
+Tomando ${Q}_{n}=Aexp\left(ikn\right) \quad$ donde $\quad 0<k<\pi$: Remplazando y operando se obtiene.
+
+$${\Omega}^{2}\left[1+exp\left(-ik \right)+\lambda exp\left(ik\right)\right] ={w}_{0}^{2}$$
+
+Utilizando la fórmula de Euler para el coseno:
+$$\Omega^{2} \left[1+2\lambda\cos(k)\right]=w_{0}^{2}$$
+Obteniendo:
+$$\omega = \pm \frac{w_{0}}{\sqrt{1+2\lambda\cos(k)}}$$
+
+Rescribiendo la ecuación (2) de manera matricial para un sistema de n anillos resonadores.
+$$
+{\fontsize{5}{5}\selectfont 
+{ { \Omega  } }^{ 2 }\begin{pmatrix} 1 & \lambda  & 0 & 0 & \dots  & \dots  & \dots  & \dots  & 0 \\ \lambda  & 1 & \lambda  & 0 & \dots  & \dots  & \dots  & \dots  & 0 \\ 0 & \lambda  & 1 & \lambda  & 0 & \dots  & \dots  & \dots  & \vdots  \\ 0 & 0 & \lambda  & 1 & \ddots  & 0 & \dots  & \dots  & \vdots  \\ \vdots  & 0 & 0 & \ddots  & \ddots  & \ddots  & 0 & \dots  & \vdots  \\ \vdots  & \vdots  & \vdots  & \ddots  & \ddots  & \ddots  & \lambda  & 0 & \vdots  \\ \vdots  & \vdots  & \vdots  & \ddots  & \ddots  & \lambda  & 1 & \lambda  & 0 \\ \vdots  & 0 & \vdots  & 0 & \ddots  & \ddots  & \lambda  & 1 & \lambda  \\ 0 & \dots  & \dots  & \dots  & \dots  & 0 & 0 & \lambda  & 1 \end{pmatrix}\begin{pmatrix} { Q }_{ 1 } \\ { Q }_{ 2 } \\ { Q }_{ 3 } \\ \vdots  \\ \vdots  \\ \vdots  \\ { Q }_{ n-2 } \\ { Q }_{ n-1 } \\ { Q }_{ n } \end{pmatrix}={ w }_{ 0 }^{ 2 }\begin{pmatrix} { Q }_{ 1 } \\ { Q }_{ 2 } \\ { Q }_{ 3 } \\ \vdots  \\ \vdots  \\ \vdots  \\ { Q }_{ n-2 } \\ { Q }_{ n-1 } \\ { Q }_{ n } \end{pmatrix}
+}
+$$
+Rescribiendo la lo anterior de la forma:
+
+$${ { \Omega  } }^{ 2 }\widehat { M } \overrightarrow { Q } ={ w }_{ 0 }^{ 2 }\overrightarrow { Q } $$
+
+Despejando:
+$${ w }_{ 0 }^{ 2 }\widehat {{ M }}^{-1} \overrightarrow { Q } ={ \Omega  }^{ 2 }\overrightarrow { Q } $$
+Obteniendo un problema de valores propios donde $\Omega^{2}$ seran los valores propios de la matriz $\widehat{W}=w_{0}^{2} \widehat{M}^{-1}$
+
+Ahora para el problema no lineal el cual modela la siguiente ecuación diferencial:
+\begin{equation}
+\frac { { d }^{ 2 } }{ d{ t }^{ 2 } } \left[ { q }_{ n }+\lambda \left( { q }_{ n+1 }+{ q }_{ n-1 } \right) \right]=-{ w }_{ 0 }^{ 2 }{ q }_{ n }+\chi{ w }_{ 0 }^{ 6 }{ q }_{ n }^{ 3 }
+\end{equation}
+
+Se propone la solución de la forma:
+$$ { q }_{ n }\left( t \right) ={ Q }_{ n }\sin { \left( \Omega t \right)  } $$
+
+Se remplaza y realizan las operaciones necesarias.
+$$\left( { w }_{ 0 }^{ 2 }-{ \Omega  }^{ 2 } \right) { Q }_{ n }\sin { \left( \Omega t \right) +\chi { w }_{ 0 }^{ 6 } } { { Q }_{ n }^{ 3 } }\sin ^{ 3 } \left( \Omega t \right) -$$
+$${ \Omega  }^{ 2 }\lambda \left( { Q }_{ n-1 }+{ Q }_{ n+1 } \right) \sin  \left( \Omega t \right) =0 $$
+
+\par
+Utilizando la aproximacion de onda rotante de $\sin^{3}(x)=\frac{3}{4}\sin(x)-\frac{1}{4}\sin(3x)$ se obtiene para el n-simo resonador:
+\begin{equation}
+\frac{3}{4}\chi w_{0}^{6}Q_{n}^{3}+\left(\Omega^{2}-w_{0}^{2}\right)Q_{n}+\lambda\Omega^{2}\left(Q_{n-1}+Q_{n+1}\right)=0
+\end{equation}
+
+Rescribiendo la ecuación (4) de manera matricial para un sistema de n anillos resonadores:
+
+$${\fontsize{6}{6}\selectfont 
+\begin{pmatrix} a+b{ Q }_{ 1 }^{ 2 } & \lambda { \Omega  }^{ 2 } & 0 & \cdots  & \cdots  & \cdots  & 0 \\ \lambda { \Omega  }^{ 2 } & a+b{ Q }_{ 1 }^{ 2 } & \lambda { \Omega  }^{ 2 } & \ddots  & \ddots  & \ddots  & \vdots  \\ 0 & \lambda { \Omega  }^{ 2 } & a+b{ Q }_{ 1 }^{ 2 } & \lambda { \Omega  }^{ 2 } & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \lambda { \Omega  }^{ 2 } & \ddots  & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \ddots  & \ddots  & \ddots  & \lambda { \Omega  }^{ 2 } & 0 \\ \vdots  & 0 & \ddots  & \ddots  & \ddots  & a+b{ Q }_{ n-1 }^{ 2 } & \lambda { \Omega  }^{ 2 } \\ 0 & \cdots  & \cdots  & \cdots  & \cdots  & \lambda { \Omega  }^{ 2 } & a+b{ Q }_{ n }^{ 2 } \end{pmatrix}\begin{pmatrix} { Q }_{ 1 } \\ { Q }_{ 2 } \\ { Q }_{ 3 } \\ \vdots  \\ \vdots  \\ \vdots  \\ { Q }_{ n-1 } \\ { Q }_{ n } \end{pmatrix}=\begin{pmatrix} 0 \\ 0 \\ 0 \\ \vdots  \\ \vdots  \\ \vdots  \\ \vdots  \\ 0 \end{pmatrix}}$$
+
+Donde $a=\left(\Omega^{2}-w_{0}^{2}\right)$ y $b= \frac{3}{4}\chi w_{0}^{6}$
+
+Ecuación para el enésimo resonador acoplado:
+
+$$\frac{d^{2}}{dt^{2}}\left[q_{n}+\lambda\left(q_{n+1}+q_{n-1}\right)\right]=-w_{0}^{2}q_{n}+\chi w_{0}^{6}q_{n}^{3}$$
+
+Para $n= 1,2,3,4...n;$ donde $q_{n+1}=0$, se tiene el sistema en el lado derecho de la ecuacion (1):
+
+$${\fontsize{6}{6}\selectfont
+\frac { { d }^{ 2 } }{ d{ t }^{ 2 } } \begin{pmatrix} { q }_{ 1 } & \lambda { q }_{ 2 } & 0 & \cdots  & \cdots  & \cdots  & 0 \\ \lambda { q }_{ 1 } & { q }_{ 2 } & \lambda { q }_{ 3 } & \ddots  & \ddots  & \ddots  & \vdots  \\ 0 & \lambda { q }_{ 2 } & { q }_{ 3 } & \lambda { q }_{ 4 } & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \lambda { q }_{ 3 } & \ddots  & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \ddots  & \ddots  & \ddots  & \lambda { q }_{ n-1 } & 0 \\ \vdots  & 0 & \ddots  & \ddots  & \lambda { q }_{ n-2 } & { q }_{ n-1 } & \lambda { q }_{ n } \\ 0 & \cdots  & \cdots  & \cdots  & \cdots  & \lambda { q }_{ n-1 } & { q }_{ n } \end{pmatrix}}=$$
+
+$${\fontsize{8}{8}\selectfont
+=\frac { { d }^{ 2 } }{ d{ t }^{ 2 } } \begin{bmatrix} \begin{pmatrix} 1 & \lambda  & 0 & \cdots  & \cdots  & \cdots  & 0 \\ \lambda  & 1 & \lambda  & \ddots  & \ddots  & \ddots  & \vdots  \\ 0 & \lambda  & 1 & \lambda  & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \lambda  & \ddots  & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \ddots  & \ddots  & \ddots  & \lambda  & 0 \\ \vdots  & 0 & \ddots  & \ddots  & \lambda  & 1 & \lambda  \\ 0 & \cdots  & \cdots  & \cdots  & \cdots  & \lambda  & 1 \end{pmatrix}\begin{pmatrix} { q }_{ 1 } \\ { q }_{ 2 } \\ { q }_{ 3 } \\ \vdots  \\ \vdots  \\ \vdots  \\ \vdots  \\ { q }_{ n } \end{pmatrix} \end{bmatrix}}
+$$
+Rescribiendo de la forma:
+$${\fontsize{8}{8}\selectfont
+\begin{pmatrix} 1 & \lambda  & 0 & \cdots  & \cdots  & \cdots  & 0 \\ \lambda  & 1 & \lambda  & \ddots  & \ddots  & \ddots  & \vdots  \\ 0 & \lambda  & 1 & \lambda  & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \lambda  & \ddots  & \ddots  & \ddots  & \vdots  \\ \vdots  & \ddots  & \ddots  & \ddots  & \ddots  & \lambda  & 0 \\ \vdots  & 0 & \ddots  & \ddots  & \lambda  & 1 & \lambda  \\ 0 & \cdots  & \cdots  & \cdots  & \cdots  & \lambda  & 1 \end{pmatrix}\frac { { d }^{ 2 } }{ d{ t }^{ 2 } } \begin{pmatrix} { q }_{ 1 } \\ { q }_{ 2 } \\ { q }_{ 3 } \\ \vdots  \\ \vdots  \\ \vdots  \\ \vdots  \\ { q }_{ n } \end{pmatrix}=\widehat{M}_{1}\frac {{d}^{2}\overrightarrow {{q}_{n}}}{d{t}^{2}}}$$
+De manera similar para el lado derecho de 1 se tiene:
+
+$${\fontsize{7}{7}\selectfont
+\begin{pmatrix} { -w }_{ 0 }^{ 2 }+\chi { w }_{ 0 }^{ 6 }{ q }_{ 1 }^{ 2 } & 0 & \cdots  & \cdots  & 0 \\ 0 & { -w }_{ 0 }^{ 2 }+\chi { w }_{ 0 }^{ 6 }{ q }_{ 2 }^{ 2 } & \vdots  & \vdots  & \vdots  \\ \vdots  & 0 & \ddots  & \vdots  & \vdots  \\ \vdots  & \vdots  & \ddots  & 0 & \vdots  \\ \vdots  & \vdots  & 0 & { -w }_{ 0 }^{ 2 }+\chi { w }_{ 0 }^{ 6 }{ q }_{ n-1 }^{ 2 } & 0 \\ 0 & \cdots  & \cdots  & 0 & { -w }_{ 0 }^{ 2 }+\chi { w }_{ 0 }^{ 6 }{ q }_{ n }^{ 2 } \end{pmatrix}\begin{pmatrix} { q }_{ 1 } \\ { q }_{ 2 } \\ { q }_{ 3 } \\ \vdots  \\ \vdots  \\ { q }_{ n } \end{pmatrix}=\widehat { { M }_{ 2 } } \overrightarrow { { q }_{ n } }  }$$
+
+igualando 2 y 3 se tiene:
+
+\begin{equation}
+\widehat{M}_{1}\frac{d^{2}\overrightarrow { { q }_{ n } } }{dt^{2}}=\widehat{M}_{2}\overrightarrow { { q }_{ n } }  \rightarrow \frac{d^{2}\overrightarrow{q}_{n}}{dt^{2}}=\widehat{M}_{1}^{-1}\widehat{M}_{2} \overrightarrow{q}_{n}=\widehat{M}_{3}\overrightarrow{q}_{n}
+\end{equation}
+\\
+donde $\widehat{M}_{3}=\widehat{M}_{1}^{-1}\widehat{M}_{2} $.
+
+hamiltoniano $H= \sum_{n=1}^{n} H_{n}$; donde:
+
+$$H_{n}=\frac{1}{2} \left[\dot{{q}_{n}}^{2}+\dot{{q}_{n}}\left(\dot{{q}_{n-1}}+\dot{{q}_{n+1}}\right)\right]+V_{n}$$
+donde 
+$$V_{n}= \frac{1}{2}\left(w_{0}q_{n}\right)^{2}\left[
+1-\frac{1}{2}\chi \left(w_{0}^{2}q_{n}\right)^{2}\right] $$
+\section{\normalsize{ANÁLISIS}}
+
+Con el fin de estudiar un campo electromagnético que se propaga a lo largo del eje z ecuación (5) y bajo la condición de que el haz no tiene mayor cambio en los otros dos ejes, lo cual  permite tratar a este haz de luz  como una onda plana monocromática  (haz Gaussiano),  y utilizando la ecuación diferencial paraxial de la óptica (4) y la transformada de Fourier (1)(2), se encuentra la respuesta analítica al problema de la propagación del haz y el tamaño de la cintura de este $w_{0}$, hoy en día se tienen computadoras que permiten solucionar este problema utilizando algoritmos los cuales generan respuestas numéricas con una buena exactitud, esta es una nueva manera de realizar un experimento, claro esta que debemos comparar los resultados obtenidos de una manera computacional con los encontrados en el laboratorio, a hora utilizando el software de matlaB y algoritmos  internos de la transformada de Fourier se abordara el problema de propagación de un haz gaussiano.
+Antes de realizar el estudio de la propagación se comprueba que la transformada de Fourier funciona y que se ha realizado de una buena manera el cambio del dominio del tiempo o el espacio al dominio de las frecuencias, para esto realizamos un arreglo de posiciones $[-L,L]$ con un espaciado de $n$ particiones, con esto se realiza la simulación de la ecuación de una gaussiana donde su grafica es:
+
+
+Lo siguiente es llevar esta función gaussiana $ y=Aexp\left[-\frac{x^{2}}{2}\right] $,al espacio de Fourier mediante el algoritmo de la transformada rápida de Fourier esta función en el espacio de frecuencia debe ser otra ecuación gaussiana la cual la multiplicaremos por un factor de propagación $(z)$, con esto tenemos  ecuación de tipo Gaussiana en el espacio de Fourier propagada  el siguiente paso es llevar esta respuesta del espacio de Fourier o de la frecuencias  al espacio temporal o espacial esto se realiza utilizando la función de Matlab de la transformada inversa esta función da como resultado un arreglo el cual se elevó al cuadrado  graficado   con respecto al arreglo inicial de posiciones  como lo muestra la siguiente figura donde se ve la propagación y la función sin propagar.
+
+
+Con lo observado en la figura \ref{2} se demuestra que la transformada de Fourier implementada es funcionando y puede ser implementada en el problema principal con el campo electromagnético que se propaga a lo largo del eje z dado por
+
+$$E(z)= E_{0} \frac{w_{0}}{w(z)}  \mathrm{exp} \left[-\frac{r^{2}}{w^{2}(z)}\right]$$
+
+
+Al darle valores de entrada a r en ecuación con un arreglo de posiciones y graficarlo se obtiene 
+
+\newpage
+A hora aplicando el procedimiento de la transforma de Fourier y teniendo cuidado con las unidades en las que trabajamos las cuales están implícitas en el factor propagador ($Z=\frac{z}{2k}$) Donde z es la distancia recorrida a lo largo del eje, $k=\frac{2\pi}{\lambda}$ y $\lambda$ es la longitud de onda del haz, la propagación del haz de luz a lo largo del eje z se muestra en la siguiente grafica  
+
+
+En la figura anterior la curva de color rojo  representa el $I$ del campo $E$ sin propagar  mientras que la gaussiana de color azul es el campo propagado se puede observar que tiene una altura menor.
+
+Para obtener la cintura del haz se utiliza la ecuación (\ref{w}) esto de manera analítica, pero en el software tenemos herramientas de procesamiento de curvas como el lsqcurvefit en este caso con este comando se realiza un fit para esto se debe proporcionarle una función de inicio con constantes a determinar y un par de puntos de partida una semilla.
+
+$$ f_{(x)}= a_{(1)}exp\left[-\frac{2x^{2}}{a_{(2)}^{2}}\right];$$
+
+Donde podemos comparar esta ecuación con la $6$ del campo y decir que $a_{(1)}$ igual al primer termino y $a_{(2)}$ es igual $w^{2}$ de esta manera se encuentra la cintura del haz propagada la que podemos comparar con el dato encontrado de forma teórica;Para verificar que el fit esta bien realizado y que el valor de las constantes son los medidos, realizamos la grafica de la ecuación con los valores encontrados si estos son los valores que se buscan las graficas de intensidad propagada y el fit se solaparan una sobre la otra como se muestra en la figura
+
+
+Al observar que las graficas se solapan una con la otra se exporta el valor de la constante ya que:
+
+$$a_{(2)} \approx w^{2}$$
+$$a_{(2)}= 22.7209 \wedge  w_{(z)}^{2}= 22.6482$$
+Donde $w^{2}$ es el calculado de manera teórica con la ecuación $(6)$, también se observa que los dos valores discrepan en unas pocas cifras, esto debido a que la computadora pierde decimales, el error en la cintura es del $0.32\%$, el cual es un error muy pequeño. 
+\subsection{DIFRACCIÓN DE CAMPO LEJANO Y CERCANO}
+En la siguiente parte se realizo la solución computacional de las integrales de fresnel tal como esta en el libro de Classical and Modern Optics capitulo 12 a continuación se muestra las graficas de las soluciones de estas integrales.
+
+ 
+ Se puede observar l naturaleza oscilatoria de los resultados de estas integrales en las graficas anteriores también se sabe que son impares ya que son evaluadas en el intervalo $[0,x]$, 
+Las integrales de Fresnel se trazan como la "espiral de Cornu", que es un gráfico paramétrico de S (t) vs. C (t) como se muestra en la figura.
+
+
+para la siguiente parte del estudio se realiza la simulación de un haz de luz que pasa por una rendija de tamaño $a$, lo que permite estudiar la difracción de campo lejano y campo cercano, mediante la transformada de Fourier se puede propagar el campo electromagnético que se modela con una ecuación de tipo gaussiana al aplicar las condiciones de contorno de la rendija de tamaño a las cuales son
+
+$ f(x) = \left \{ \begin{matrix} 0 & \mbox{si } \mbox{-a}<x> \mbox{a}
+\\ Aexp\left[-\frac{x^{2}}{w_{0}}\right] & \mbox{si } \mbox{[-a,a]}\end{matrix}\right. $
+
+se realiza un arreglo de posiciones con el que se evaluara  la función a trozo definida anteriormente, que representa un pulso de delta de Dirac como se muestra en la figura
+ 
+
+a la función anterior la cual representa la situación física del haz de luz gaussiano al pasar por la rendija de tamaño $a$, se le realizo el todo el proceso con el que se estudió la propagación pero a hora con la rendija se observan cambios en la intensidad del campo dependiendo de la distancia de propagación.
+
+
+
+La figura anterior ilustra la intensidad del campo propagado que atravesó la rendija una distancia de $z = 0.0025(\frac{a^{2}}{2\lambda})$,  donde a es el tamaño de la rendija $\lambda$ es la longitud  onda del haz $(\lambda = 850 )$La figura anterior ilustra la intensidad del campo propagado que atravesó la rendija una distancia de $z = 0.0025(\frac{a^{2}}{2\lambda})$,  donde a es el tamaño de la rendija $\lambda$ es la longitud  onda del haz $(\lambda = 850 \mu m )$.
+
+La grafica anterior es una representación de la difracción de campo cercano se observa como oscilación el campo en el punto de mayor intensidad.
+
+
+La figura anterior ilustra la intensidad del campo propagado que atravesó la rendija una distancia de $z = 0.025(a^{2}/2\lambda)$,a medida que la propagación del campo es mas grande se observa como el patrón de difracción cambia ya que las oscilaciones no son en el máximo, a hora son picos mas pronunciados  y separados.
+
+
+La figura anterior ilustra la intensidad del campo propagado que atravesó la rendija una distancia de $z = 0.225(a^{2}/2\lambda)$,A mayor separación de la rendija se observa como la intensidad toma de nuevo comportamiento de tipo gaussiano aun se puede notar pequeñas perturbaciones en la base del pico.
+
+
+
+Las figuras (a), (b) se muestra la difracción de campo lejano o difracción de difracción de Fraunhofer, mientras mas grande es la propagación del haz de luz se puede observar en la figuras que tiene un máximo de intensidad y en su base tiene otras pequeños máximos de intensidad en la practica representan franjas brillantes y los mínimos son sombras.
+
+\section{CONCLUSIÓN}
+Mediante las herramientas computacionales de Matlab y los algoritmos de transformada de rápida de Fourier, transformada inversa de Fourier se analizó un campo electromagnético que se modelo  como un haz gaussiano, a este  se estudio el anchoo de la cintura de manera experimental con el software de matlab y se comparo con la cintura teórica del haz a la misma distancia encontrando un error de $0.32\%$, además se estudiaron los patrones de difracción de Fresnel   y difracción de Fraunhofer en las cuales se obtuvieron los patrones de difracción a  distancias de propagación que sugeridas por el libro de Classical and Modern Optics en el capitulo 12,
+Donde se encontró discrepancia con el valor dela distancia de propagación ya que faltaba un factor de $\pi$.
+\section{Referencias}
+\begin{itemize}
+	\item[[ 1]] Óptica. Tercera edición, E. HECHT, ADDI- SON WESLEY. cap.6 , 12.
+	\item[[ 2]] Cortés, J. A., Medina, F. A., \& Chaves, J. A. (2007). Del análisis de fourier a las wavelets análisis de fourier. Scientia et technica, 1(34).
+	\item[[3]] González, G. (1997). Series de Fourier, transformadas de Fourier y aplicaciones. Divulgaciones matemáticas, 5(1/2), 43-60.
+	\item[[4]] Piqué, T. M., \& Vázquez, A. (2012). Uso de Espectroscopía Infrarroja con Transformada de Fourier (FTIR) en el estudio de la hidratación del cemento. Concreto y cemento. Investigación y desarrollo, 3(2), 62-71.		   
+\end{itemize}
+
+\end{document}
